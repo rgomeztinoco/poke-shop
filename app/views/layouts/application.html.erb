@@ -6,14 +6,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <%= javascript_pack_tag 'hello_react' %>
+    <%= javascript_pack_tag "application" %>
   </head>
 
   <body>
-    <h1>hello</h1>
+    <%= react_component("GlobalStyles") %>
+    <%= react_component("Header") %>
     <%= yield %>
   </body>
 </html>
