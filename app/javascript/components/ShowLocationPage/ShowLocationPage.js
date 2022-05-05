@@ -25,7 +25,11 @@ function ShowLocationPage({ id }) {
       <h2>Areas:</h2>
       {location.areas.map((area) => {
         const id = getIdFromURL(area.url);
-        return <Button href={`/areas/${id}`} content={area.name} key={id} />;
+        return (
+          <Button href={`/areas/${id}`} key={id}>
+            {area.name}
+          </Button>
+        );
       })}
     </div>
   ) : (

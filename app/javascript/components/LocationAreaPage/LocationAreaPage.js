@@ -7,8 +7,9 @@ import { POKE_URI } from "../../config";
 import Character from "../Character";
 import MapComponent from "../MapComponent";
 
-function LocationAreaPage({ id }) {
+function LocationAreaPage({ id, user }) {
   const [area, setArea] = useState("");
+  console.log(user);
 
   useEffect(() => {
     fetch(`${POKE_URI}/location-area/${id}`)
@@ -37,6 +38,9 @@ function LocationAreaPage({ id }) {
     left: 2rem;
     z-index: 1;
     background-color: whitesmoke;
+    padding-block: 0.5rem;
+    padding-inline: 2.5rem;
+    border-radius: 100px;
   `;
 
   const getPokemonName = ({ pokemon }) => pokemon.name;

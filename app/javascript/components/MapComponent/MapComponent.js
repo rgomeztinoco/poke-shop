@@ -5,7 +5,7 @@ import { jsx, css } from "@emotion/react";
 import { useEffect, useState, useRef } from "react";
 import { getRandomInt } from "../../helpers/get_random";
 import { UseKeyDown } from "../../hooks/UseKeys";
-import PokemonCard from "../PokemonCard";
+import PokemonEncounter from "../PokemonEncounter";
 
 function MapComponent({ pokemonNames }) {
   const mapRef = useRef();
@@ -59,10 +59,11 @@ function MapComponent({ pokemonNames }) {
         />
         {pokemonNames.map((name) => {
           return (
-            <PokemonCard
+            <PokemonEncounter
               name={name}
               top={getRandomInt(4000 - 200)}
               left={getRandomInt(6000 - 200)}
+              key={name}
             />
           );
         })}

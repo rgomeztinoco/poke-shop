@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # Associations
+  has_many :pokemons
   has_secure_password
 
   # Validations

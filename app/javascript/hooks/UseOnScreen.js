@@ -15,7 +15,7 @@ export function useOnScreen(options) {
 
     return () => {
       if (ref) {
-        observer.unobserv(ref);
+        observer.unobserve(ref);
       }
     };
   }, [ref, options]);

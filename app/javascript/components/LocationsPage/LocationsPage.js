@@ -25,11 +25,9 @@ function LocationsPage() {
         locations.map((location) => {
           const id = getIdFromURL(location.url);
           return (
-            <Button
-              href={`/locations/${id}`}
-              content={location.name}
-              key={id}
-            />
+            <Button href={`/locations/${id}`} key={id}>
+              {location.name}
+            </Button>
           );
         })
       ) : (

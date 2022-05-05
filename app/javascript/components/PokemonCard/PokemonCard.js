@@ -2,47 +2,68 @@
 // it tells babel how to convert properly
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { useEffect, useState } from "react";
-import { POKE_URI } from "../../config";
 
-function PokemonCard({ name, pokemonData, top, left }) {
-  const [pokemon, setPokemon] = useState(pokemonData);
-
-  useEffect(() => {
-    if (pokemonData) return;
-
-    fetch(`${POKE_URI}/pokemon/${name}`)
-      .then((res) => res.json())
-      .then((parsedRes) => {
-        setPokemon(parsedRes);
-        console.log(parsedRes);
-      })
-      .catch((e) => console.log(e.message));
-  }, []);
-
+function PokemonCard({ pokemon }) {
   const style = css`
-    padding: 0.5rem;
-    position: absolute;
-    top: ${top}px;
-    left: ${left}px;
+    padding: 1rem;
     background-color: whitesmoke;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
+    & img {
+      padding-inline: 1rem;
+    }
   `;
 
-  return (
+  const pillStyle = css`
+    display: inline-block;
+    background-color: gainsboro;
+    padding-block: 0.25rem;
+    padding-inline: 0.5rem;
+    border-radius: 10px;
+  `;
+
+  const headerStyle = css`
+    display: flex;
+    justify-content: space-between;
+  `;
+
+  const pillsStyle = css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  `;
+
+  const subtitleStyle = css`
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  `;
+
+  return pokemon ? (
     <div css={style}>
-      {pokemon ? (
-        <div>
-          <div>
-            <span>#{pokemon.id}</span>
-            <span>{pokemon.name}</span>
-          </div>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        </div>
-      ) : (
-        <p>loading...</p>
-      )}
+      <div css={headerStyle}>
+        <span>#{pokemon.id}</span>
+        <span>{pokemon.name}</span>
+      </div>
+      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <p css={subtitleStyle}>Types:</p>
+      <div css={pillsStyle}>
+        {pokemon.types.map(({ type }) => (
+          <p css={pillStyle} key={type.name}>
+            {type.name}
+          </p>
+        ))}
+      </div>
+      <p css={subtitleStyle}>Abilities:</p>
+      <div css={pillsStyle}>
+        {pokemon.abilities.map(({ ability }) => (
+          <p css={pillStyle} key={ability.name}>
+            {ability.name}
+          </p>
+        ))}
+      </div>
     </div>
+  ) : (
+    <p>loading...</p>
   );
 }
 
