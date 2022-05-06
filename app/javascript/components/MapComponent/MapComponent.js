@@ -7,7 +7,7 @@ import { getRandomInt } from "../../helpers/get_random";
 import { UseKeyDown } from "../../hooks/UseKeys";
 import PokemonEncounter from "../PokemonEncounter";
 
-function MapComponent({ pokemonNames }) {
+function MapComponent({ pokemonNames, user }) {
   const mapRef = useRef();
 
   UseKeyDown("ArrowUp", () => {
@@ -60,10 +60,10 @@ function MapComponent({ pokemonNames }) {
         {pokemonNames.map((name) => {
           return (
             <PokemonEncounter
-              name={name}
               top={getRandomInt(4000 - 200)}
               left={getRandomInt(6000 - 200)}
               key={name}
+              {...{ name, user }}
             />
           );
         })}

@@ -5,11 +5,12 @@ import { jsx, css } from "@emotion/react";
 import { useEffect, useState, useRef } from "react";
 import { POKE_URI } from "../../config";
 import { useOnScreen } from "../../hooks/UseOnScreen";
-import Button from "../Button/Button";
+import Button from "../Button";
 import PokemonCard from "../PokemonCard";
 
-function PokemonEncounter({ name, top, left }) {
+function PokemonEncounter({ name, user, top, left }) {
   const [pokemon, setPokemon] = useState(null);
+  const [hasBeenOpened, setHasBeenOpened] = useState(false);
   const [onScreenRef, isVisible] = useOnScreen({ rootMargin: "-250px" });
   const modalRef = useRef(null);
 
@@ -23,13 +24,36 @@ function PokemonEncounter({ name, top, left }) {
   }, []);
 
   useEffect(() => {
+    if (hasBeenOpened) return;
+
     if (pokemon && isVisible) {
       modalRef.current.showModal();
+      setHasBeenOpened(true);
     }
   }, [isVisible]);
 
-  const handleCloseModal = () => {
+  const closeModal = () => {
     modalRef.current.close();
+  };
+
+  const handleCloseModal = () => {
+    closeModal();
+  };
+
+  const handleCapture = () => {
+    const data = { jsonData: JSON.stringify(pokemon) };
+    fetch("/pokemons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token token=${user.token}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        closeModal();
+      });
   };
 
   const style = css`
@@ -70,7 +94,7 @@ function PokemonEncounter({ name, top, left }) {
       <dialog ref={modalRef} css={modalStyle}>
         <PokemonCard {...{ pokemon }} />
         <div css={footerStyle}>
-          <Button>Capture</Button>
+          <Button onClick={handleCapture}>Capture</Button>
           <Button outline onClick={handleCloseModal}>
             Leave
           </Button>

@@ -18,21 +18,36 @@ function LocationsPage() {
       });
   }, []);
 
+  const style = css`
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  `;
+
+  const buttonsStyle = css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  `;
+
   return (
-    <div>
+    <div css={style}>
       <h1>Kanto Region</h1>
-      {locations ? (
-        locations.map((location) => {
-          const id = getIdFromURL(location.url);
-          return (
-            <Button href={`/locations/${id}`} key={id}>
-              {location.name}
-            </Button>
-          );
-        })
-      ) : (
-        <p>loading...</p>
-      )}
+      <div css={buttonsStyle}>
+        {locations ? (
+          locations.map((location) => {
+            const id = getIdFromURL(location.url);
+            return (
+              <Button href={`/locations/${id}`} key={id}>
+                {location.name}
+              </Button>
+            );
+          })
+        ) : (
+          <p>loading...</p>
+        )}
+      </div>
     </div>
   );
 }

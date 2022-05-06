@@ -1,0 +1,6 @@
+<%= simple_form_for @user do |f| %>
+  <%= f.input :username %>
+  <%= f.input :password %>
+  <%= f.button :submit, value: "Create Account" %>
+  <%= link_to "Login", login_path %>
+<% end %>

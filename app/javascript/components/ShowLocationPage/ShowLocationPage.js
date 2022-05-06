@@ -19,18 +19,33 @@ function ShowLocationPage({ id }) {
       .catch((e) => console.log(e.message));
   }, []);
 
+  const style = css`
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  `;
+
+  const buttonsStyle = css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  `;
+
   return location ? (
-    <div>
+    <div css={style}>
       <h1>{location.name}</h1>
       <h2>Areas:</h2>
-      {location.areas.map((area) => {
-        const id = getIdFromURL(area.url);
-        return (
-          <Button href={`/areas/${id}`} key={id}>
-            {area.name}
-          </Button>
-        );
-      })}
+      <div css={buttonsStyle}>
+        {location.areas.map((area) => {
+          const id = getIdFromURL(area.url);
+          return (
+            <Button href={`/areas/${id}`} key={id}>
+              {area.name}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   ) : (
     <p>loading...</p>

@@ -2,7 +2,7 @@
 // it tells babel how to convert properly
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { CgPokemon, CgShoppingCart } from "react-icons/cg";
+import { CgPokemon, CgShoppingCart, CgLogOut } from "react-icons/cg";
 
 function Header() {
   const style = css`
@@ -12,6 +12,11 @@ function Header() {
     justify-content: space-between;
     align-items: center;
     background-color: red;
+    & a {
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+    }
   `;
 
   const navStyle = css`
@@ -22,10 +27,19 @@ function Header() {
 
   return (
     <header css={style}>
-      <h1>Pokemon Shop</h1>
+      <a href="/">
+        <h1>Pokemon Shop</h1>
+      </a>
       <nav css={navStyle}>
-        <CgPokemon />
-        <CgShoppingCart />
+        <a href="/pokemons">
+          <CgPokemon />
+        </a>
+        <a href="/cart">
+          <CgShoppingCart />
+        </a>
+        <a href="/logout">
+          <CgLogOut />
+        </a>
       </nav>
     </header>
   );

@@ -3,14 +3,16 @@ class SessionsController < ApplicationController
     @user = User.new
   end
 
-  # POST "/sessions"
+  # POST "/login"
   def create
     @user = User.find_by(username: params[:user][:username])
     if @user&.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       redirect_to "/"
     else
-      redirect_to login_path
+      @user = User.new(username: params[:user][:username], password: params[:user][:password])
+      @user.validate
+      render :new, status: :unprocessable_entity
     end
   end
 

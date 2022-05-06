@@ -9,7 +9,6 @@ import MapComponent from "../MapComponent";
 
 function LocationAreaPage({ id, user }) {
   const [area, setArea] = useState("");
-  console.log(user);
 
   useEffect(() => {
     fetch(`${POKE_URI}/location-area/${id}`)
@@ -49,6 +48,7 @@ function LocationAreaPage({ id, user }) {
     <div css={style}>
       <h1 css={titleStyle}>{area.name}</h1>
       <MapComponent
+        {...{ user }}
         pokemonNames={area.pokemon_encounters.map(getPokemonName)}
       />
       <Character />

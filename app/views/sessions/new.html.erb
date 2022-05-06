@@ -1,5 +1,6 @@
-<%= simple_form_for @user, url: sessions_path do |f| %>
+<%= simple_form_for @user, url: login_path do |f| %>
   <%= f.input :username %>
   <%= f.input :password %>
-  <%= f.button :submit %>
+  <%= f.button :submit, value: "Login" %>
+  <%= link_to "Signup", signup_path %>
 <% end %>
