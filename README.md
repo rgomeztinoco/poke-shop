@@ -9,4 +9,8 @@ How to run in local:
 - Clone the repo
 - run `rails db:create` y `rails db:migrate`
 - run `rails server`
-- open `localhost:3000` in
+- open `localhost:3000` in your favorite browser
+
+---
+
+Deployed in https://pokemon-shop-rgomez.herokuapp.com/login
