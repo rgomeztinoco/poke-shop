@@ -2,7 +2,7 @@
 // it tells babel how to convert properly
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { getRandomInt } from "../../helpers/get_random";
 import { UseKeyDown } from "../../hooks/UseKeys";
 import PokemonEncounter from "../PokemonEncounter";

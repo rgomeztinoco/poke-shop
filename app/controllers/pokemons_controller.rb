@@ -20,7 +20,7 @@ class PokemonsController < ApplicationController
       render json: @pokemon.errors, status: :unprocessable_entity
     end
   end
-  
+
   def delete
     @pokemon = Pokemon.find(params[:id])
 
