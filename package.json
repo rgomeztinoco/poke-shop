@@ -22,5 +22,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "engines": {
+    "node": "16.14.2"
   }
 }
